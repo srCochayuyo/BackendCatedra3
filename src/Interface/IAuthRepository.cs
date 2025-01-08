@@ -17,5 +17,6 @@ namespace catedra3Backend.src.Interface
         Task<IdentityResult> checkPasswordbyEmail(string id, string newPassword);
 
          Task<string> GetTokenByEmail(string email);
+
     }
 }

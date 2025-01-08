@@ -44,7 +44,7 @@ namespace catedra3Backend.src.Repository
 
             if(appUser == null)
             {
-                throw new Exception("Error. Usuario no registrado o contraseña incorrecta");
+                throw new Exception("Credenciales inválidas");
             }
 
 
@@ -55,7 +55,7 @@ namespace catedra3Backend.src.Repository
                 return IdentityResult.Success;
             }
 
-            throw new Exception("Error. Usuario no registrado o contraseña incorrecta");
+            throw new Exception("Credenciales inválidas");
         }
 
         public async Task<string> GetTokenByEmail(string email)
@@ -64,7 +64,7 @@ namespace catedra3Backend.src.Repository
 
             if (appUser == null)
             {
-                throw new Exception("Error. usuario no registrado o contraseña incorrecta");
+                throw new Exception("Credenciales inválidas");
                 
             }
 
@@ -73,5 +73,6 @@ namespace catedra3Backend.src.Repository
             return token;
             
         }
+
     }
 }

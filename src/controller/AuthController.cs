@@ -40,11 +40,6 @@ namespace catedra3Backend.src.controller
 
                 }
 
-
-                AppUser appUser = request.ToUserRegister();
-
-                //Buscar user por email retornar BadRequest Error. El correo electrónico ingresado ya existe en el sistema
-
                 if(string.IsNullOrEmpty(request.Email))
                 {
                     return BadRequest(new {message ="Error. El Email es requerido"});
@@ -56,6 +51,8 @@ namespace catedra3Backend.src.controller
                     return BadRequest(new { message = "Error. La contraseña es requerida"});
                     
                 }
+
+                AppUser appUser = request.ToUserRegister();
 
                 var createUser = await _authRepository.CreateUserAsync(appUser, request.Password);
 
