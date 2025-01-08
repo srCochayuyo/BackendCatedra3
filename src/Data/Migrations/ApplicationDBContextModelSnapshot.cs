@@ -192,10 +192,6 @@ namespace catedra3Backend.src.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
@@ -232,6 +228,9 @@ namespace catedra3Backend.src.Data.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("FechaPost")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Image")
                         .IsRequired()

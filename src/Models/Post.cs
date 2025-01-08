@@ -12,9 +12,11 @@ namespace catedra3Backend.src.Models
 
         public string Titulo {get; set;} = string.Empty;
 
+        public DateTime FechaPost {get; set;}
+
         public string Image {get; set;} =string.Empty;
 
         [ForeignKey("AppUser")]
         public string UserID {get; set;} = string.Empty;
     }
-}
+}   

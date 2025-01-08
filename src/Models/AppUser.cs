@@ -8,6 +8,6 @@ namespace catedra3Backend.src.Models
 {
     public class AppUser : IdentityUser
     {
-        public string Password {get; set;} = string.Empty;
+       //Id, Email y password se gestiona atraves de identity user
     }
 }

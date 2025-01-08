@@ -11,8 +11,8 @@ using catedra3Backend.src.Data;
 namespace catedra3Backend.src.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250108012230_firstMigration")]
-    partial class firstMigration
+    [Migration("20250108014810_moreMigration")]
+    partial class moreMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -195,10 +195,6 @@ namespace catedra3Backend.src.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
 
@@ -235,6 +231,9 @@ namespace catedra3Backend.src.Data.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("FechaPost")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Image")
                         .IsRequired()

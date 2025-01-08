@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace catedra3Backend.src.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class moreMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,6 @@ namespace catedra3Backend.src.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -60,6 +59,7 @@ namespace catedra3Backend.src.Data.Migrations
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Titulo = table.Column<string>(type: "TEXT", nullable: false),
+                    FechaPost = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Image = table.Column<string>(type: "TEXT", nullable: false),
                     UserID = table.Column<string>(type: "TEXT", nullable: false)
                 },
