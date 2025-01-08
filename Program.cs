@@ -12,10 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 Env.Load();
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder
     .Services.AddIdentity<AppUser, IdentityRole>(opt =>
@@ -90,6 +86,11 @@ builder.Services.AddSwaggerGen(option =>
     );
 });    
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+
 //conxeion con base de datos
 string stringConnection = Environment.GetEnvironmentVariable("DATABASE_URL") ?? "data_source";
 builder.Services.AddDbContext<ApplicationDBContext>(opt => opt.UseSqlite(stringConnection));
@@ -115,6 +116,8 @@ using (var scope = app.Services.CreateScope())
 }
 
 
+app.UseAuthentication(); 
+app.UseAuthorization();  
 app.UseHttpsRedirection();
 app.Run();
 
