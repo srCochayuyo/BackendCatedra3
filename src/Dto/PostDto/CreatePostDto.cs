@@ -9,13 +9,14 @@ namespace catedra3Backend.src.Dto.PostDto
     public class CreatePostDto
     {
         [Required]
-        public string titulo {get; set;} = string.Empty!;
+        [MinLength(5, ErrorMessage = "El título debe tener al menos 5 caracteres.")]
+        public string Titulo {get; set;} = string.Empty!;
 
         [Required]
-        public DateTime fechaPost {get; set;}
+        public DateTime FechaPost {get; set;}
 
         [Required]
-        public string image {get; set;} = string.Empty!;
+        public string Image {get; set;} = string.Empty!;
 
         [Required]
         public string userId {get; set;} = string.Empty!;

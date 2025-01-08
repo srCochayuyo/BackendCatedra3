@@ -4,6 +4,7 @@ using catedra3Backend.src.Interface;
 using catedra3Backend.src.Models;
 using catedra3Backend.src.Repository;
 using catedra3Backend.src.services;
+using CloudinaryDotNet;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -15,7 +16,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 Env.Load();
 
+//Cloudinary
+string CloudName = Environment.GetEnvironmentVariable("Cloudinary_cloudname") ?? "cloud_name";
+string CloudKey = Environment.GetEnvironmentVariable("Cloudinary_apiKey") ?? "cloud_Key";
+string CloudASecret = Environment.GetEnvironmentVariable("Cloudinary_ApiSecret") ?? "cloud_secrete";
 
+var cloudinaryAccount = new Account(
+    CloudName,
+    CloudKey,
+    CloudASecret
+);
+
+var Cloudinary = new Cloudinary(cloudinaryAccount);
+builder.Services.AddSingleton(Cloudinary);
+
+//Identity Role
 builder
     .Services.AddIdentity<AppUser, IdentityRole>(opt =>
     {
@@ -27,6 +42,7 @@ builder
     })
     .AddEntityFrameworkStores<ApplicationDBContext>();
 
+//Authentication
 builder
     .Services.AddAuthentication(opt =>
     {
@@ -56,6 +72,7 @@ builder
         };
     });
 
+//SwaggerGen
 builder.Services.AddSwaggerGen(option =>
 {
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo API", Version = "v1" });
@@ -104,7 +121,7 @@ string stringConnection = Environment.GetEnvironmentVariable("DATABASE_URL") ?? 
 builder.Services.AddDbContext<ApplicationDBContext>(opt => opt.UseSqlite(stringConnection));
 
 
-
+//App builder
 var app = builder.Build();
 
 
@@ -114,6 +131,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 using (var scope = app.Services.CreateScope())
