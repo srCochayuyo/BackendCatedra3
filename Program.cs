@@ -138,7 +138,11 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDBContext>();
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync();
+
+    //Seeder
+    await DataSeeder.SeedData(userManager, context);
 }
 
 app.MapControllers(); 
