@@ -85,5 +85,24 @@ namespace catedra3Backend.src.controller
 
 
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> getAllPost()
+        {
+            try{
+
+                var posts = await _postRepository.getPosts();
+
+                return Ok(new {
+                    messgae = "Posts obtenidos con exito",
+                    Posts = posts
+                });
+
+            }catch(Exception e){
+
+                return BadRequest(new {message =e.Message});
+            }
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace catedra3Backend.src.Interface
     public interface IPostRepository
     {
         Task<ResponsePostDto> CreatePost(CreatePostDto request,string imageUrl,string userId);
+
+        Task<List<ResponsePostDto>> getPosts();
         
     }
 }

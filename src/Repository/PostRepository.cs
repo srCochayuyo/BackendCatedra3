@@ -7,6 +7,7 @@ using catedra3Backend.src.Dto.PostDto;
 using catedra3Backend.src.Interface;
 using catedra3Backend.src.Mappers;
 using catedra3Backend.src.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace catedra3Backend.src.Repository
 {
@@ -23,6 +24,7 @@ namespace catedra3Backend.src.Repository
         {
             var PostRequest = new Post {
                 Titulo = request.Titulo,
+                //Hora chilena
                 FechaPost = TimeZoneInfo.ConvertTime(DateTime.Now,TimeZoneInfo.FindSystemTimeZoneById("Pacific SA Standard Time")),
                 Image = imageUrl,
                 UserID = userId
@@ -33,6 +35,19 @@ namespace catedra3Backend.src.Repository
 
             var response = PostRequest.ToPostResponseDto();
             return response;
+        }
+
+        public async Task<List<ResponsePostDto>> getPosts()
+        {
+            var postList = await _context.Post.ToListAsync();
+
+            if (!postList.Any()) 
+            {
+                throw new Exception("No Hay Post");
+            }
+
+
+            return postList.Select(c => c.ToPostResponseDto()).ToList();
         }
     }
 }

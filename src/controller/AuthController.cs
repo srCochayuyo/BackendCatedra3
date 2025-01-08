@@ -43,6 +43,8 @@ namespace catedra3Backend.src.controller
 
                 AppUser appUser = request.ToUserRegister();
 
+                //Buscar user por email retornar BadRequest Error. El correo electrónico ingresado ya existe en el sistema
+
                 if(string.IsNullOrEmpty(request.Email))
                 {
                     return BadRequest(new {message ="Error. El Email es requerido"});
@@ -74,18 +76,6 @@ namespace catedra3Backend.src.controller
 
                     var errors = createUser.Errors.Select(e => e.Description);
 
-                    if(errors.Any(e => e.Contains("Username")))
-                    {
-
-                        errors = errors.Select(e => e.Replace("Username", " Error. El correo electrónico ingresado ya existe en el sistema")).ToList();
-
-                        errors = errors.Select(e => e.Replace(" is already taken", "")).ToList();
-                        
-                        errors = errors.Select(e => Regex.Replace(e, @"'[^']+'", "")).ToList();
-
-                        return BadRequest(new {message = errors});
-                    }
-
                     return StatusCode(500, new { message = errors});
                 }
 
@@ -115,7 +105,7 @@ namespace catedra3Backend.src.controller
 
             if(!result.Succeeded )
             {
-                return BadRequest( new {message = "Error. Usuario no registrado o contraseña incorrecta"});
+                return Unauthorized( new {message = "Credenciales inválidas"});
             }
 
             var token = await _authRepository.GetTokenByEmail(request.Email);
