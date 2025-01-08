@@ -5,12 +5,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using catedra3Backend.src.Interface;
 using catedra3Backend.src.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace catedra3Backend.src.services
 {
-    public class TokenServices
+    public class TokenServices : ITokenService
     {
          private readonly SymmetricSecurityKey _key;
 
