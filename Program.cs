@@ -113,7 +113,7 @@ builder.Services.AddControllers();
 //repositorios
 builder.Services.AddScoped<ITokenService, TokenServices>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-
+builder.Services.AddScoped<IPostRepository, PostRepository>();
 
 
 //conxeion con base de datos

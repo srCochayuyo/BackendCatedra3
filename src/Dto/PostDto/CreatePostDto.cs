@@ -13,13 +13,8 @@ namespace catedra3Backend.src.Dto.PostDto
         public string Titulo {get; set;} = string.Empty!;
 
         [Required]
-        public DateTime FechaPost {get; set;}
+        public IFormFile Image {get; set;} = null!;
 
-        [Required]
-        public string Image {get; set;} = string.Empty!;
-
-        [Required]
-        public string userId {get; set;} = string.Empty!;
 
 
     }

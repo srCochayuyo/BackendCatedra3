@@ -58,7 +58,7 @@ namespace catedra3Backend.src.Repository
             throw new Exception("Error. Usuario no registrado o contraseña incorrecta");
         }
 
-        public async Task<string> GetUserByEmail(string email)
+        public async Task<string> GetTokenByEmail(string email)
         {
             var appUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
 

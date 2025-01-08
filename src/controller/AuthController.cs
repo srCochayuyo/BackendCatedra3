@@ -118,7 +118,7 @@ namespace catedra3Backend.src.controller
                 return BadRequest( new {message = "Error. Usuario no registrado o contraseña incorrecta"});
             }
 
-            var token = await _authRepository.GetUserByEmail(request.Email);
+            var token = await _authRepository.GetTokenByEmail(request.Email);
         
             var response = new
             {
