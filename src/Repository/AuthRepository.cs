@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using catedra3Backend.src.Data;
+using catedra3Backend.src.Dto;
 using catedra3Backend.src.Interface;
+using catedra3Backend.src.Mappers;
 using catedra3Backend.src.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -51,6 +53,20 @@ namespace catedra3Backend.src.Repository
             }
 
             throw new Exception("Error. Usuario no registrado o contraseña incorrecta");
+        }
+
+        public async Task<AppUserDto> GetUserByEmail(string email)
+        {
+            var appUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (appUser == null)
+            {
+                throw new Exception("Error. usuario no registrado o contraseña incorrecta");
+                
+            }
+
+            AppUserDto appUserDto = appUser.ToUserDto();
+            return appUserDto;
         }
     }
 }

@@ -29,6 +29,7 @@ namespace catedra3Backend.src.controller
             _tokenService = tokenService;
         }
 
+        //Metodo para registrar usuarip
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] loginRegisterDto request)
         {
@@ -97,6 +98,68 @@ namespace catedra3Backend.src.controller
 
             }
         }
+
+
+        //Metodo para logearse
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(loginRegisterDto request)
+    {
+        try {
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+            var result = await _authRepository.checkPasswordbyEmail(request.Email, request.Password);
+
+            var AppUserDto = await _authRepository.GetUserByEmail(request.Email);
+
+            AppUser appUser = AppUserDto.ToUser();
+
+            if(!result.Succeeded || appUser == null)
+            {
+                return BadRequest( new {message = "Error. Usuario no registrado o contraseña incorrecta"});
+            }
+
+            string token = _tokenService.CreateToken(appUser);
+        
+            var response = new
+            {
+
+                message = "Incio de sesion exitoso",
+                Token = token
+
+            };
+
+            return Ok(response);
+
+
+
+            
+
+        }catch(Exception e)
+        {
+            return StatusCode(500, new {message = e.Message});
+        }
+    }
+
+
+
+
+
+
+
+
+
+
         
     }
+
+    
+
+
+
+    
 }

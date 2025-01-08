@@ -11,8 +11,8 @@ using catedra3Backend.src.Data;
 namespace catedra3Backend.src.Data.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250108014810_moreMigration")]
-    partial class moreMigration
+    [Migration("20250108034838_newMigrations")]
+    partial class newMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

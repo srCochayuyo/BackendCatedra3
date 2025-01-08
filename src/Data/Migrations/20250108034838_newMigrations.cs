@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace catedra3Backend.src.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class moreMigration : Migration
+    public partial class newMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

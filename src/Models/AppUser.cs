@@ -9,5 +9,6 @@ namespace catedra3Backend.src.Models
     public class AppUser : IdentityUser
     {
        //Id, Email y password se gestiona atraves de identity user
+
     }
 }

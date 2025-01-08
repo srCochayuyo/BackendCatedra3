@@ -17,5 +17,23 @@ namespace catedra3Backend.src.Mappers
                 Email = registerDto.Email,
             };
         }
+
+        public static AppUserDto ToUserDto(this AppUser user)
+        {
+            return new AppUserDto
+            {
+                Id = user.Id,
+                Email = user.Email!,
+            };
+        }
+
+        public static AppUser ToUser(this AppUserDto userDto)
+        {
+            return new AppUser
+            {
+                Id = userDto.Id,
+                Email = userDto.Email,
+            };
+        }
     }
 }
