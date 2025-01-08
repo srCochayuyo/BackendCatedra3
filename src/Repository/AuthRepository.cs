@@ -18,11 +18,14 @@ namespace catedra3Backend.src.Repository
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-        public AuthRepository(ApplicationDBContext context, UserManager<AppUser> userManager,SignInManager<AppUser> signInManager)
+         private readonly ITokenService _tokenService;
+
+        public AuthRepository(ApplicationDBContext context, UserManager<AppUser> userManager,SignInManager<AppUser> signInManager,ITokenService tokenService)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
         public async Task<IdentityResult>CreateUserAsync(AppUser user, string password)
@@ -55,7 +58,7 @@ namespace catedra3Backend.src.Repository
             throw new Exception("Error. Usuario no registrado o contraseña incorrecta");
         }
 
-        public async Task<AppUserDto> GetUserByEmail(string email)
+        public async Task<string> GetUserByEmail(string email)
         {
             var appUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
 
@@ -65,8 +68,10 @@ namespace catedra3Backend.src.Repository
                 
             }
 
-            AppUserDto appUserDto = appUser.ToUserDto();
-            return appUserDto;
+            var token = _tokenService.CreateToken(appUser);
+
+            return token;
+            
         }
     }
 }

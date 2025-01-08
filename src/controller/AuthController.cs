@@ -21,12 +21,10 @@ namespace catedra3Backend.src.controller
 
         private readonly IAuthRepository _authRepository;
 
-        private readonly ITokenService _tokenService;
 
-        public AuthController(IAuthRepository authRepository, ITokenService tokenService)
+        public AuthController(IAuthRepository authRepository)
         {
             _authRepository = authRepository;
-            _tokenService = tokenService;
         }
 
         //Metodo para registrar usuarip
@@ -114,16 +112,13 @@ namespace catedra3Backend.src.controller
 
             var result = await _authRepository.checkPasswordbyEmail(request.Email, request.Password);
 
-            var AppUserDto = await _authRepository.GetUserByEmail(request.Email);
 
-            AppUser appUser = AppUserDto.ToUser();
-
-            if(!result.Succeeded || appUser == null)
+            if(!result.Succeeded )
             {
                 return BadRequest( new {message = "Error. Usuario no registrado o contraseña incorrecta"});
             }
 
-            string token = _tokenService.CreateToken(appUser);
+            var token = await _authRepository.GetUserByEmail(request.Email);
         
             var response = new
             {
@@ -135,8 +130,6 @@ namespace catedra3Backend.src.controller
 
             return Ok(response);
 
-
-
             
 
         }catch(Exception e)
@@ -146,20 +139,9 @@ namespace catedra3Backend.src.controller
     }
 
 
-
-
-
-
-
-
-
-
         
     }
 
     
-
-
-
     
 }

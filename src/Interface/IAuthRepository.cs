@@ -13,9 +13,9 @@ namespace catedra3Backend.src.Interface
         Task<IdentityResult> CreateUserAsync(AppUser user, string password);
 
         Task<IdentityResult> AddRole(AppUser user, string role);
-        
+
         Task<IdentityResult> checkPasswordbyEmail(string id, string newPassword);
 
-         Task<AppUserDto> GetUserByEmail(string email);
+         Task<string> GetUserByEmail(string email);
     }
 }
