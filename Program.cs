@@ -1,6 +1,9 @@
 using System.Text;
 using catedra3Backend.src.Data;
+using catedra3Backend.src.Interface;
 using catedra3Backend.src.Models;
+using catedra3Backend.src.Repository;
+using catedra3Backend.src.services;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -88,6 +91,11 @@ builder.Services.AddSwaggerGen(option =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+
+//repositorios
+builder.Services.AddScoped<ITokenService, TokenServices>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 
 
@@ -115,7 +123,7 @@ using (var scope = app.Services.CreateScope())
     await context.Database.MigrateAsync();
 }
 
-
+app.MapControllers(); 
 app.UseAuthentication(); 
 app.UseAuthorization();  
 app.UseHttpsRedirection();
