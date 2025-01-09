@@ -90,6 +90,16 @@ namespace catedra3Backend.src.Data
                             .AddSeconds(random.Next(0, 60)),
                         Image = "https://res.cloudinary.com/dms2bhrnq/image/upload/v1736357600/WhatsApp_Image_2025-01-08_at_14.32.48_ueo3oe.jpg",
                         UserID = users[2].Id
+                    },
+                    new Post
+                    {
+                        Titulo = "The big one",
+                        FechaPost = new DateTime(2025, 01, 09)
+                            .AddHours(random.Next(0, 24))
+                            .AddMinutes(random.Next(0, 60))
+                            .AddSeconds(random.Next(0, 60)),
+                        Image = "https://res.cloudinary.com/dms2bhrnq/image/upload/v1736316006/Catedra3/mnxgb4cpgv8wmvmifgnp.jpg",
+                        UserID = users[2].Id
                     }
                 };
 
