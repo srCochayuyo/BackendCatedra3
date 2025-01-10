@@ -30,6 +30,18 @@ var cloudinaryAccount = new Account(
 var Cloudinary = new Cloudinary(cloudinaryAccount);
 builder.Services.AddSingleton(Cloudinary);
 
+//CORS
+builder.Services.AddCors( options => {
+
+    options.AddPolicy(
+        "AllowLocalhost",
+        builder =>
+        {
+            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        }
+    );
+});
+
 //Identity Role
 builder
     .Services.AddIdentity<AppUser, IdentityRole>(opt =>
