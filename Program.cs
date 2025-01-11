@@ -157,6 +157,7 @@ using (var scope = app.Services.CreateScope())
     await DataSeeder.SeedData(userManager, context);
 }
 
+app.UseCors("AllowLocalhost");
 app.MapControllers(); 
 app.UseAuthentication(); 
 app.UseAuthorization();  

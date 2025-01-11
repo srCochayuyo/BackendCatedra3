@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace catedra3Backend.src.controller
 {
-    [Route("posts")]
+    [Route("api/posts")]
     [ApiController]
     [Authorize]
     public class PostController : ControllerBase
